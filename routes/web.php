@@ -1,5 +1,7 @@
 <?php
 
+use App\Jobs\SendEmailJob;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +15,14 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('sendEmail',function(){
+
+    SendEmailJob::dispatch()
+                ->delay(now()->addSeconds(20));
+
+    // SendEmailJob::dispatch();
+
+    return 'Email is send properly';
 });
